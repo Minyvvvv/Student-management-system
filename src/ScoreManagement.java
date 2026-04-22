@@ -14,10 +14,10 @@ public class ScoreManagement {
 
 控制台输入（Scanner）
 或简单菜单系统*/
-private List<Student> studentlist = new ArrayList<>();
+private static List<Student> studentlist = new ArrayList<>();
 
 //添加学生功能逻辑：学号检验+成绩范围检验
-public boolean addStudent(Student stu){
+public static boolean addStudent(Student stu){
     if (stu == null){
         System.out.println("输入非法。");
         return false;
@@ -40,7 +40,7 @@ public boolean addStudent(Student stu){
     return true;
 }
 //修改成绩：读取学生信息集合对指定学号的成绩
-public boolean modifyScore(String id, double newScore) {
+public static boolean modifyScore(String id, double newScore) {
     if (newScore < 0 || newScore > 100) {
         System.out.println("成绩范围错误");
         return false;
@@ -56,22 +56,22 @@ public boolean modifyScore(String id, double newScore) {
 }
 
 //删除学生:通过学号的匹配来删除对应学生,先检验学号，
-public boolean removalStudent(String id){
+public static boolean removalStudent(String id){
     for (int i = 0 ; i < studentlist.size() ; i++) {
         if (studentlist.get(i).getId().equals(id)){
             studentlist.remove(i);
             return true;
         }
     }
-    System.out.println("学好不存在。");
+    System.out.println("学号不存在。");
     return false;
 }
 
 //查询成绩：传入学号来进行成绩的查询
-public boolean checkResults(String id){
+public static boolean checkResults(String id){
     for (Student s : studentlist) {
         if (s.getId().equals(id)){
-            System.out.println(id + "同学的成绩为" + s.getScore() + ".");
+            System.out.println(id + "同学的信息为：\n姓名:" + s.getName() +"\n分数："  +  s.getScore() + ".");
             return true;
         }
     }
@@ -80,7 +80,7 @@ public boolean checkResults(String id){
 }
 
 //成绩排序：初阶冒泡
-public List<Student> rankStudents(){
+public static List<Student> rankStudents(){
     //创建副本
     List<Student> copy = new ArrayList<>(studentlist);
 
