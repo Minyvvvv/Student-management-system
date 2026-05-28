@@ -32,15 +32,17 @@ public class User {
         this.password = password;
     }
     //登陆方法：
-    public void signIn(String account , String password){
+    public boolean signIn(String account , String password){
         User tempUser = new User(account , password);
         for (User i:Database.Userdata) {
             if (tempUser.getAccount().equals(i.getAccount())&& tempUser.getPassword().equals(password)){
                 System.out.println("登陆成功！");
                 break;
             }
+            return true;
         }
         System.out.println("用户未注册。");
         //在此处应该设置一个信号来判断是否允许进入程序，可将方法改为布尔类型，用输出的值来进行判断
+        return false;
     }
 }
