@@ -1,3 +1,5 @@
+package User;
+
 public class User {
     private String account;
     private String password;
@@ -11,6 +13,8 @@ public class User {
         this.account = account;
         this.password = password;
     }
+
+    public User() { }
 
     public String getAccount() {
         return account;
@@ -29,6 +33,14 @@ public class User {
     }
     //登陆方法：
     public void signIn(String account , String password){
-        for ()
+        User tempUser = new User(account , password);
+        for (User i:Database.Userdata) {
+            if (tempUser.getAccount().equals(i.getAccount())&& tempUser.getPassword().equals(password)){
+                System.out.println("登陆成功！");
+                break;
+            }
+        }
+        System.out.println("用户未注册。");
+        //在此处应该设置一个信号来判断是否允许进入程序，可将方法改为布尔类型，用输出的值来进行判断
     }
 }
