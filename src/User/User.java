@@ -1,5 +1,7 @@
 package User;
 
+import java.lang.Character;
+
 public class User {
     private String account;
     private String password;
@@ -32,17 +34,54 @@ public class User {
         this.password = password;
     }
     //登陆方法：
-    public boolean signIn(String account , String password){
+    public int signIn(String account , String password){
         User tempUser = new User(account , password);
         for (User i:Database.Userdata) {
-            if (tempUser.getAccount().equals(i.getAccount())&& tempUser.getPassword().equals(password)){
-                System.out.println("登陆成功！");
-                break;
+            if (tempUser.getAccount().equals(i.getAccount())){
+                if (tempUser.getPassword().equals(i.getPassword())){
+                    System.out.println("登陆成功！");
+                    return 0; //登陆成功
+                }else {
+                    System.out.println("密码错误，请重新输入！");
+                    return 2;
+                }
             }
-            return true;
+
         }
         System.out.println("用户未注册。");
-        //在此处应该设置一个信号来判断是否允许进入程序，可将方法改为布尔类型，用输出的值来进行判断
+        return 2;
+    }
+    public static boolean exist(String account) {
+        for (User u : Database.Userdata) {
+            if (u.getAccount().equals(account)){
+                System.out.println("账号重复。");
+                return true;
+            }
+        }
         return false;
+    }
+    public static boolean Password_verification(String password) {
+        //判断密码位数是否符合要求
+        if (password.length() < 6 || password.length() > 18 ) {
+            return false;
+        }
+
+        //三种字符组合：数字，字母，符号
+        boolean hasDigit = false;
+        boolean hasLetter = false;
+        boolean hasSpecial = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (Character.isLetter(c)) {
+                hasLetter = true;
+            }else {
+                hasSpecial = true;
+            }
+
+        }
+        return hasDigit && hasLetter && hasSpecial;
+
     }
 }
