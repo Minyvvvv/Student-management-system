@@ -1,9 +1,10 @@
-import User.User;
-import User.Database;
+import model.Student;
+import model.User;
+import model.Database;
 import java.util.Scanner;
-import static User.Database.Userdata;
-import static User.User.Password_verification;
-import static User.User.exist;
+
+import static model.User.Password_verification;
+import static model.User.exist;
 import static util.FileUtil.*;
 
 
